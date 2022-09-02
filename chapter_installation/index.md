@@ -105,6 +105,16 @@ pip install tensorflow-probability==0.16.0
 
 :end_tab:
 
+:begin_tab:`mindspore`
+我们可以按如下方式安装MindSpore的CPU或GPU版本：
+
+```bash
+pip install https://ms-release.obs.cn-north-4.myhuaweicloud.com/1.8.1/MindSpore/gpu/x86_64/cuda-11.1/mindspore_gpu-1.8.1-cp38-cp38-linux_x86_64.whl --trusted-host ms-release.obs.cn-north-4.myhuaweicloud.com -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+
+:end_tab:
+
 我们的下一步是安装`d2l`包，以方便调取本书中经常使用的函数和类：
 
 ```bash
@@ -163,6 +173,21 @@ cd tensorflow
 :end_tab:
 
 
+:begin_tab:`mindspore`
+
+```bash
+mkdir d2l-zh && cd d2l-zh
+curl https://zh-v2.d2l.ai/d2l-zh-2.0.0.zip -o d2l-zh.zip
+unzip d2l-zh.zip && rm d2l-zh.zip
+cd mindspore
+```
+
+
+注意：如果没有安装`unzip`，则可以通过运行`sudo apt install unzip`进行安装。
+
+:end_tab:
+
+
 安装完成后我们可以通过运行以下命令打开Jupyter笔记本（在Window系统的命令行窗口中运行以下命令前，需先将当前路径定位到刚下载的本书代码解压后的目录）：
 
 ```bash
@@ -186,5 +211,9 @@ jupyter notebook
 :end_tab:
 
 :begin_tab:`tensorflow`
+[Discussions](https://discuss.d2l.ai/t/2084)
+:end_tab:
+
+:begin_tab:`mindspore`
 [Discussions](https://discuss.d2l.ai/t/2084)
 :end_tab:

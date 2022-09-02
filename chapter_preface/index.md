@@ -100,6 +100,13 @@ d2l = sys.modules[__name__]
 下面是我们如何从TensorFlow导入模块。
 :end_tab:
 
+:begin_tab:`mindspore`
+本书中的大部分代码都是基于MindSpore的。MindSpore是一个开源的深度学习框架，在研究界和产业界都非常受欢迎。本书中的所有代码都在最新版本的MindSpore下通过了测试。但是，由于深度学习的快速发展，一些在印刷版中代码可能在MindSpore的未来版本无法正常工作。
+但是，我们计划使在线版本保持最新。如果读者遇到任何此类问题，请查看 :ref:`chap_installation` 以更新代码和运行时环境。
+
+下面是我们如何从MindSpore导入模块。
+:end_tab:
+
 ```{.python .input}
 #@save
 from mxnet import autograd, context, gluon, image, init, np, npx
@@ -124,6 +131,14 @@ from PIL import Image
 #@save
 import numpy as np
 import tensorflow as tf
+```
+
+```{.python .input}
+#@tab mindspore
+#@save
+import numpy as np
+import mindspore as mm
+from mindspore import nn, ops
 ```
 
 ### 目标受众

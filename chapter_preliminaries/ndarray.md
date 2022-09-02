@@ -8,7 +8,7 @@
 首先，我们介绍$n$维数组，也称为*张量*（tensor）。
 使用过Python中NumPy计算包的读者会对本部分很熟悉。
 无论使用哪个深度学习框架，它的*张量类*（在MXNet中为`ndarray`，
-在PyTorch和TensorFlow中为`Tensor`）都与Numpy的`ndarray`类似。
+在PyTorch和TensorFlow和MindSpore中为`Tensor`）都与Numpy的`ndarray`类似。
 但深度学习框架又比Numpy的`ndarray`多一些重要功能：
 首先，GPU很好地支持加速计算，而NumPy仅支持CPU计算；
 其次，张量类支持自动微分。
@@ -38,6 +38,12 @@
 由于`tensorflow`名称有点长，我们经常在导入它后使用短别名`tf`。
 :end_tab:
 
+:begin_tab:`mindspore`
+首先，我们导入`mindspore`以及`mindspore.numpy`。
+`mindspore.numpy`模块提供了一系列类NumPy接口。用户可以使用类NumPy语法在MindSpore上进行模型的搭建。
+由于`mindspore`名称有点长，我们经常在导入它后使用短别名`ms`。
+:end_tab:
+
 ```{.python .input}
 from mxnet import np, npx
 npx.set_np()
@@ -53,6 +59,12 @@ import torch
 import tensorflow as tf
 ```
 
+```{.python .input}
+#@tab mindspore
+import mindspore as ms
+import mindspore.numpy as mnp
+from mindspore import nn, ops
+```
 
 [**张量表示由一个数值组成的数组，这个数组可能有多个维度**]。
 具有一个轴的张量对应数学上的*向量*（vector）；
@@ -71,6 +83,9 @@ import tensorflow as tf
 首先，我们可以使用 `range` 创建一个行向量 `x`。这个行向量包含以0开始的前12个整数，它们默认创建为整数。也可指定创建类型为浮点数。张量中的每个值都称为张量的 *元素*（element）。例如，张量 `x` 中有 12 个元素。除非额外指定，新的张量将存储在内存中，并采用基于CPU的计算。
 :end_tab:
 
+:begin_tab:`mindspore`
+首先，我们可以使用 `arange` 创建一个行向量 `x`。这个行向量包含以0开始的前12个整数，它们默认创建为整数。也可指定创建类型为浮点数。张量中的每个值都称为张量的 *元素*（element）。例如，张量 `x` 中有 12 个元素。除非额外指定，新的张量将存储在内存中，并采用基于CPU的计算。
+:end_tab:
 
 ```{.python .input}
 x = np.arange(12)
@@ -86,6 +101,12 @@ x
 ```{.python .input}
 #@tab tensorflow
 x = tf.range(12)
+x
+```
+
+```{.python .input}
+#@tab mindspore
+x = mnp.arange(12)
 x
 ```
 
@@ -114,6 +135,11 @@ x.numel()
 tf.size(x)
 ```
 
+```{.python .input}
+#@tab mindspore
+x.size
+```
+
 [**要想改变一个张量的形状而不改变元素数量和元素值，可以调用`reshape`函数。**]
 例如，可以把张量`x`从形状为（12,）的行向量转换为形状为（3,4）的矩阵。
 这个新的张量包含与转换前相同的值，但是它被看成一个3行4列的矩阵。
@@ -121,7 +147,7 @@ tf.size(x)
 注意，通过改变张量的形状，张量的大小不会改变。
 
 ```{.python .input}
-#@tab mxnet, pytorch
+#@tab mxnet, pytorch, mindspore
 X = x.reshape(3, 4)
 X
 ```
@@ -156,6 +182,11 @@ torch.zeros((2, 3, 4))
 tf.zeros((2, 3, 4))
 ```
 
+```{.python .input}
+#@tab mindspore
+mnp.zeros((2, 3, 4))
+```
+
 同样，我们可以创建一个形状为`(2,3,4)`的张量，其中所有元素都设置为1。代码如下：
 
 ```{.python .input}
@@ -170,6 +201,11 @@ torch.ones((2, 3, 4))
 ```{.python .input}
 #@tab tensorflow
 tf.ones((2, 3, 4))
+```
+
+```{.python .input}
+#@tab mindspore
+mnp.ones((2, 3, 4))
 ```
 
 有时我们想通过从某个特定的概率分布中随机采样来得到张量中每个元素的值。
